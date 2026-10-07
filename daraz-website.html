@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bazaar Picks – Shop Daraz smarter</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f6fa;--card:#fff;--ink:#14213d;--mute:#5b6679;--line:#dde3ec;--acc:#f57224;--acc-ink:#fff;--teal:#0e7c7b;--tile:#e8eef6;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1626;--card:#18223a;--ink:#eef2f9;--mute:#9aa6bd;--line:#2a3652;--tile:#223052;--teal:#35c2c0}}
+:root[data-theme="dark"]{--bg:#0f1626;--card:#18223a;--ink:#eef2f9;--mute:#9aa6bd;--line:#2a3652;--tile:#223052;--teal:#35c2c0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 18px}
+header{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+.logo{font-weight:800;font-size:1.25rem;letter-spacing:-.02em;text-decoration:none}
+.logo b{color:var(--acc)}
+nav a{margin-left:18px;color:var(--mute);text-decoration:none;font-size:.95rem}
+nav a:hover{color:var(--ink)}
+.hero{padding:34px 0 26px}
+h1{font-size:clamp(2rem,6vw,3.6rem);line-height:1.05;letter-spacing:-.03em;margin:0 0 12px;font-weight:800;max-width:15ch}
+.hero p{color:var(--mute);max-width:46ch;margin:0 0 22px;font-size:1.05rem}
+.search{display:flex;gap:8px;background:var(--card);border:2px solid var(--ink);border-radius:14px;padding:6px;max-width:620px}
+.search input{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font:inherit;font-size:1.05rem;padding:10px 12px;outline:none}
+.btn{background:var(--acc);color:var(--acc-ink);border:0;border-radius:10px;font:inherit;font-weight:600;padding:10px 18px;cursor:pointer;text-decoration:none;display:inline-block}
+.btn:hover{filter:brightness(.93)}
+:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 6px}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:7px 15px;font:inherit;font-size:.92rem;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+h2{font-size:1.5rem;margin:30px 0 14px;letter-spacing:-.02em}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.pic{background:var(--tile);height:130px;display:grid;place-items:center;font-size:3.4rem}
+.body{padding:14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.body h3{margin:0;font-size:1.05rem}
+.body p{margin:0;color:var(--mute);font-size:.9rem;flex:1}
+.body .btn{text-align:center;margin-top:8px}
+.empty{color:var(--mute);padding:20px 0}
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.how div{border-left:4px solid var(--teal);padding:4px 0 4px 14px}
+.how strong{display:block}
+.how span{color:var(--mute);font-size:.93rem}
+footer{margin:44px 0 24px;padding-top:18px;border-top:1px solid var(--line);color:var(--mute);font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="logo" href="#top">Bazaar<b>Picks</b></a>
+    <nav><a href="#picks">Picks</a><a href="#how">How it works</a></nav>
+  </header>
+
+  <section class="hero" id="top">
+    <h1>Find it on Daraz, faster.</h1>
+    <p>Hand-picked everyday products with one-tap links to Daraz. Search anything, or browse the picks below.</p>
+    <form class="search" id="searchForm" role="search">
+      <input id="q" type="search" placeholder="Search Daraz e.g. wireless earbuds" aria-label="Search Daraz">
+      <button class="btn" type="submit">Search on Daraz</button>
+    </form>
+    <div class="chips" id="chips" role="group" aria-label="Categories"></div>
+  </section>
+
+  <section id="picks">
+    <h2>Today's picks</h2>
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty" hidden>Nothing here yet. Try another category.</div>
+  </section>
+
+  <section id="how">
+    <h2>How it works</h2>
+    <div class="how">
+      <div><strong>Pick a product</strong><span>Browse by category or use the search box.</span></div>
+      <div><strong>Open it on Daraz</strong><span>Each button opens the matching Daraz results in a new tab.</span></div>
+      <div><strong>Order on Daraz</strong><span>Price, delivery and payment are handled by Daraz.</span></div>
+    </div>
+  </section>
+
+  <footer>Bazaar Picks is an independent site and is not run by Daraz. Product names are links to search results on daraz.pk.</footer>
+</div>
+
+<script>
+// ---- EDIT HERE ----
+var DARAZ_SEARCH = "https://www.daraz.pk/catalog/?q=";
+var EXTRA_PARAMS = ""; // e.g. "&your_tracking=abc" if you join an affiliate program
+var PRODUCTS = [
+  {n:"Wireless earbuds", e:"🎧", c:"Electronics", d:"Bluetooth earbuds with a charging case."},
+  {n:"Power bank 20000mAh", e:"🔋", c:"Electronics", d:"Keeps your phone going through load shedding."},
+  {n:"Smart watch", e:"⌚", c:"Electronics", d:"Steps, calls and notifications on your wrist."},
+  {n:"Men's kurta", e:"👕", c:"Fashion", d:"Everyday and Eid wear."},
+  {n:"Women's lawn suit", e:"👗", c:"Fashion", d:"Light summer fabrics and prints."},
+  {n:"Running shoes", e:"👟", c:"Fashion", d:"Comfortable pairs for walking and sport."},
+  {n:"Air fryer", e:"🍟", c:"Home", d:"Cook with much less oil."},
+  {n:"Electric kettle", e:"☕", c:"Home", d:"Quick boil for chai and coffee."},
+  {n:"LED desk lamp", e:"💡", c:"Home", d:"Good light for study and work."},
+  {n:"Face wash", e:"🧴", c:"Beauty", d:"Daily cleanser for all skin types."},
+  {n:"Hair dryer", e:"💨", c:"Beauty", d:"Fast drying with heat settings."},
+  {n:"School backpack", e:"🎒", c:"Kids & School", d:"Strong bags for school and tuition."}
+];
+// -------------------
+var cats = ["All"].concat(PRODUCTS.map(function(p){return p.c}).filter(function(v,i,a){return a.indexOf(v)===i}));
+var current = "All";
+var grid = document.getElementById("grid"), chips = document.getElementById("chips"), empty = document.getElementById("empty");
+function link(t){return DARAZ_SEARCH + encodeURIComponent(t) + EXTRA_PARAMS}
+function renderChips(){
+  chips.innerHTML = "";
+  cats.forEach(function(c){
+    var b = document.createElement("button");
+    b.className = "chip"; b.type = "button"; b.textContent = c;
+    b.setAttribute("aria-pressed", c===current);
+    b.onclick = function(){current = c; renderChips(); renderGrid()};
+    chips.appendChild(b);
+  });
+}
+function renderGrid(){
+  grid.innerHTML = "";
+  var list = PRODUCTS.filter(function(p){return current==="All"||p.c===current});
+  empty.hidden = list.length>0;
+  list.forEach(function(p){
+    var card = document.createElement("article"); card.className = "card";
+    var pic = document.createElement("div"); pic.className = "pic"; pic.textContent = p.e; pic.setAttribute("aria-hidden","true");
+    var body = document.createElement("div"); body.className = "body";
+    var h = document.createElement("h3"); h.textContent = p.n;
+    var d = document.createElement("p"); d.textContent = p.d;
+    var a = document.createElement("a"); a.className = "btn"; a.textContent = "View on Daraz";
+    a.href = link(p.n); a.target = "_blank"; a.rel = "noopener noreferrer sponsored";
+    body.appendChild(h); body.appendChild(d); body.appendChild(a);
+    card.appendChild(pic); card.appendChild(body); grid.appendChild(card);
+  });
+}
+document.getElementById("searchForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  var v = document.getElementById("q").value.trim();
+  if(v) window.open(link(v), "_blank", "noopener");
+});
+renderChips(); renderGrid();
+</script>
+</body>
+</html>
